@@ -1,0 +1,18 @@
+.app {
+  h1 {
+  }
+  table {
+    text-align: left;
+  }
+  .leaderboard {
+    .playerName {
+      display: flex;
+      align-items: center;
+    }
+    .avatar {
+      width: 30px;
+      height: auto;
+      margin-right: 10px;
+    }
+  }
+}
