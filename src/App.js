@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoogleSpreadsheet } from "google-spreadsheet";
+import Logo from "./logo.png";
 import "./App.scss";
 
 function App() {
@@ -20,10 +21,13 @@ function App() {
       const leaderboardSheet = doc.sheetsByIndex[0];
       const playerRows = await leaderboardSheet.getRows();
       setLeaderboard(
-        playerRows.map((row) => ({
-          name: row.Name,
-          points: row.Points,
-        }))
+        playerRows
+          .map((row) => ({
+            name: row.Name,
+            points: row.Points,
+            avatar: row.Avatar,
+          }))
+          .sort((a, b) => b.points - a.points)
       );
 
       const challengesSheet = doc.sheetsByIndex[1];
@@ -49,18 +53,18 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Video Game Olympics</h1>
-      <table className="leaderboard" cellSpacing="10px">
+      <div className="header">
+        <img src={Logo} className="logo" alt="Olympic rings logo" />
+        <h1>Video Game Olympics</h1>
+      </div>
+
+      <table className="leaderboard">
         <th>Player</th>
         <th>Points</th>
         {leaderboard.map((player) => (
           <tr>
             <td className="playerName">
-              <img
-                className="avatar"
-                src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
-                alt="Player avatar"
-              />
+              <img className="avatar" src={player.avatar} alt="Player avatar" />
               {player.name}
             </td>
             <td>{player.points}</td>
@@ -68,19 +72,19 @@ function App() {
         ))}
       </table>
 
-      <table className="topChallenges" cellSpacing="10px">
-        <th>Name</th>
-        <th>Gold Point Value</th>
-        <th>Gold Winner Name</th>
-        <th>Silver Point Value</th>
-        <th>Silver Winner Name</th>
+      <table className="topChallenges">
+        <th>Challenge Name</th>
+        <th>🥇 Points</th>
+        <th>🥇 Winner</th>
+        <th>🥈 Points</th>
+        <th>🥈 Winner</th>
         {challenges.map((challenge) => (
           <tr>
             <td>{challenge.name}</td>
-            <td>{challenge.goldVal}</td>
-            <td>{challenge.goldWinner}</td>
-            <td>{challenge.silverVal}</td>
-            <td>{challenge.silverWinner}</td>
+            <td className="alignCenter">{challenge.goldVal}</td>
+            <td className="alignCenter">{challenge.goldWinner}</td>
+            <td className="alignCenter">{challenge.silverVal}</td>
+            <td className="alignCenter">{challenge.silverWinner}</td>
           </tr>
         ))}
       </table>
