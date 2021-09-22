@@ -38,9 +38,9 @@ const App = () => {
           name: row["Challenge Name"],
           type: row["Challenge Type"],
           goldVal: row["Gold Point Value"],
-          goldWinner: row["Gold Winner Name"],
+          goldWinner: row["Gold Winner Name"] ?? "",
           silverVal: row["Silver Point Value"],
-          silverWinner: row["Silver Winner Name"],
+          silverWinner: row["Silver Winner Name"] ?? "",
         }))
       );
     };
@@ -63,6 +63,11 @@ const App = () => {
       default:
         return "";
     }
+  };
+
+  const checkIfCompleted = (challenge) => {
+    if (challenge.silverWinner !== "") return "completed";
+    return "";
   };
 
   return (
@@ -114,7 +119,7 @@ const App = () => {
         </thead>
         <tbody>
           {challenges.map((challenge) => (
-            <tr key={challenge.name}>
+            <tr key={challenge.name} className={checkIfCompleted(challenge)}>
               <td>{challenge.name}</td>
               <td className="alignCenter">{challenge.goldVal}</td>
               <td className="alignCenter">{challenge.goldWinner}</td>

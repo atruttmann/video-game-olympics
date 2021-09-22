@@ -41,11 +41,7 @@
     th {
       white-space: nowrap;
     }
-    tr:hover {
-      background-color: #fffc9c;
-      transition: ease 0.25s;
-      font-weight: bold;
-    }
+
     .lessPadding {
       padding: 10px 0;
     }
@@ -53,6 +49,7 @@
       text-align: center;
     }
   }
+
   .leaderboard {
     font-size: 1.5rem;
     margin-bottom: 100px;
@@ -64,6 +61,17 @@
       height: 40px;
       border-radius: 100%;
       margin-right: 20px;
+    }
+  }
+
+  .challenges {
+    .completed {
+      color: gray;
+    }
+    tr:hover:not(.completed) {
+      background-color: #fffc9c;
+      transition: ease 0.25s;
+      font-weight: bold;
     }
   }
 
