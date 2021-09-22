@@ -9,8 +9,9 @@ const Countdown = ({ winner }) => {
 
   useEffect(() => {
     // Note that when it's regular (non-daylight savings) time it should be GMT-0800
+    // Make sure to use military time
     const startTime = Date.parse("Oct 2, 2021 12:00:00 GMT-0700");
-    const endTime = Date.parse("Oct 2, 2021 4:00:00 GMT-0700");
+    const endTime = Date.parse("Oct 2, 2021 16:00:00 GMT-0700");
 
     const updateClock = () => {
       const currentTime = Date.now();
@@ -53,7 +54,9 @@ const Countdown = ({ winner }) => {
   if (gameOver) {
     return (
       <div className="countdown">
-        <h2 className="gameOver">{`Game over! ${winner} claims victory 👑`}</h2>
+        <h2 className="gameOver">{`Game over! ${
+          winner ?? ""
+        } claims victory 👑`}</h2>
       </div>
     );
   }
