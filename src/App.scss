@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap");
 
+body {
+  margin: 0;
+}
 .app {
   font-family: "Share Tech Mono", monospace;
   font-size: 1.25rem;
   padding: 40px 40px 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1,
   h2 {
@@ -11,6 +17,7 @@
   }
   h1 {
     font-size: 2.5rem;
+    line-height: 3.5rem;
   }
   h2 {
     font-size: 1.5rem;
@@ -20,7 +27,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-bottom: 40px;
     text-align: center;
 
@@ -30,10 +36,18 @@
     }
   }
 
+  .twoColumn,
+  .countdown {
+    margin-bottom: 60px;
+  }
+
   .twoColumn {
     display: flex;
+  }
+
+  .tableContainer {
     width: 100%;
-    margin-bottom: 100px;
+    overflow: auto;
   }
 
   table {
@@ -58,6 +72,9 @@
     .alignCenter {
       text-align: center;
     }
+    .completed {
+      color: gray;
+    }
   }
 
   .leaderboard {
@@ -79,32 +96,71 @@
     }
   }
 
-  .challenges {
-    .completed {
-      color: gray;
-    }
-  }
-
   .countdown {
     display: flex;
-    justify-content: center;
-    margin-bottom: 100px;
     font-size: 1.75rem;
     text-align: center;
 
     .timeItem {
       margin-right: 40px;
-
-      .time {
-        font-weight: bold;
-        font-size: 2.25rem;
-        color: crimson;
-        font-family: "Press Start 2P", monospace;
-        margin-bottom: 10px;
+      &:last-child {
+        margin-right: 0;
       }
+    }
+    .time {
+      font-weight: bold;
+      font-size: 2.25rem;
+      color: crimson;
+      font-family: "Press Start 2P", monospace;
+      margin-bottom: 10px;
     }
     .gameOver {
       color: crimson;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    .twoColumn {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .leaderboard {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .app {
+    padding: 20px;
+    font-size: 1rem;
+
+    h1 {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+    h2 {
+      font-size: 1rem;
+    }
+    .header .logo {
+      width: 130px;
+    }
+    .twoColumn,
+    .countdown,
+    .leaderboard {
+      margin-bottom: 40px;
+    }
+    .countdown {
+      font-size: 1.25rem;
+
+      .timeItem {
+        margin-right: 20px;
+      }
+      .time {
+        font-size: 1.5rem;
+      }
     }
   }
 }
