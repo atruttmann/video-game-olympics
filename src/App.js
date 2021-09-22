@@ -1,36 +1,47 @@
 import { useEffect, useState } from "react";
-import Papa from "papaparse";
+import { GoogleSpreadsheet } from "google-spreadsheet";
 import "./App.scss";
 
 function App() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [challenges, setChallenges] = useState([]);
-  const leaderboardLink =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYTR3sU0_2y3FMU6EtmcJFUk5f-7iC8wmMxcYBSeylok9VWVW5fYVlHOnOVucCo0zgvHoaRC-uaqpQ/pub?gid=0&single=true&output=csv";
-  const challengesLink =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYTR3sU0_2y3FMU6EtmcJFUk5f-7iC8wmMxcYBSeylok9VWVW5fYVlHOnOVucCo0zgvHoaRC-uaqpQ/pub?gid=1688795872&single=true&output=csv";
 
-  // TODO bug sometimes papaparse shows old data after updating to correct data
   useEffect(() => {
-    const fetchData = () => {
-      Papa.parse(leaderboardLink, {
-        download: true,
-        header: true,
-        complete: (results) => {
-          setLeaderboard(results.data);
-        },
-      });
-      Papa.parse(challengesLink, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          setChallenges(results.data);
-        },
-      });
+    // Initialize the sheet - doc ID is the long id in the sheets URL
+    const doc = new GoogleSpreadsheet(
+      "1OuBG8d4xZtw8utOVonv4O3bXJtxcoLnGv-o2TOplDCY"
+    );
+    const creds = require("./config/video-game-olympics-a99675815598.json"); // file with api key
+
+    const fetchData = async () => {
+      await doc.useServiceAccountAuth(creds);
+      await doc.loadInfo(); // loads document properties and worksheets
+
+      const leaderboardSheet = doc.sheetsByIndex[0];
+      const playerRows = await leaderboardSheet.getRows();
+      setLeaderboard(
+        playerRows.map((row) => ({
+          name: row.Name,
+          points: row.Points,
+        }))
+      );
+
+      const challengesSheet = doc.sheetsByIndex[1];
+      const challengeRows = await challengesSheet.getRows();
+      setChallenges(
+        challengeRows.map((row) => ({
+          name: row["Challenge Name"],
+          type: row["Challenge Type"],
+          goldVal: row["Gold Point Value"],
+          goldWinner: row["Gold Winner Name"],
+          silverVal: row["Silver Point Value"],
+          silverWinner: row["Silver Winner Name"],
+        }))
+      );
     };
+
     fetchData();
-    const interval = setInterval(fetchData, 30000); // pull data every 30 seconds
+    const interval = setInterval(fetchData, 5000); // pull data every 5 seconds
     return () => {
       clearInterval(interval);
     };
@@ -50,9 +61,9 @@ function App() {
                 src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
                 alt="Player avatar"
               />
-              {player.Name}
+              {player.name}
             </td>
-            <td>{player.Points}</td>
+            <td>{player.points}</td>
           </tr>
         ))}
       </table>
@@ -65,11 +76,11 @@ function App() {
         <th>Silver Winner Name</th>
         {challenges.map((challenge) => (
           <tr>
-            <td>{challenge["Challenge Name"]}</td>
-            <td>{challenge["Gold Point Value"]}</td>
-            <td>{challenge["Gold Winner Name"]}</td>
-            <td>{challenge["Silver Point Value"]}</td>
-            <td>{challenge["Silver Winner Name"]}</td>
+            <td>{challenge.name}</td>
+            <td>{challenge.goldVal}</td>
+            <td>{challenge.goldWinner}</td>
+            <td>{challenge.silverVal}</td>
+            <td>{challenge.silverWinner}</td>
           </tr>
         ))}
       </table>
