@@ -154,30 +154,35 @@ const App = () => {
         </div>
       </div>
 
-      <h2>All challenges</h2>
-      <div className="tableContainer">
-        <table>
-          <thead>
-            <tr>
-              <th>Challenge Name</th>
-              <th>🥇 Points</th>
-              <th>🥇 Winner</th>
-              <th>🥈 Points</th>
-              <th>🥈 Winner</th>
-            </tr>
-          </thead>
-          <tbody>
-            {challenges.map((challenge) => (
-              <tr key={challenge.name} className={checkIfCompleted(challenge)}>
-                <td>{challenge.name}</td>
-                <td className="alignCenter">{challenge.goldVal}</td>
-                <td className="alignCenter">{challenge.goldWinner}</td>
-                <td className="alignCenter">{challenge.silverVal}</td>
-                <td className="alignCenter">{challenge.silverWinner}</td>
+      <div className="challenges">
+        <h2>All challenges</h2>
+        <div className="tableContainer">
+          <table>
+            <thead>
+              <tr>
+                <th>Challenge Name</th>
+                <th>🥇 Points</th>
+                <th>🥇 Winner</th>
+                <th>🥈 Points</th>
+                <th>🥈 Winner</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {challenges.map((challenge) => (
+                <tr
+                  key={challenge.name}
+                  className={checkIfCompleted(challenge)}
+                >
+                  <td>{challenge.name}</td>
+                  <td className="alignCenter">{challenge.goldVal}</td>
+                  <td className="alignCenter">{challenge.goldWinner}</td>
+                  <td className="alignCenter">{challenge.silverVal}</td>
+                  <td className="alignCenter">{challenge.silverWinner}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
