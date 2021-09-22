@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { GoogleSpreadsheet } from "google-spreadsheet";
-import Logo from "./logo.png";
+import Countdown from "./Countdown";
+import Logo from "./logo.jpg";
 import "./App.scss";
 
-function App() {
+const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [challenges, setChallenges] = useState([]);
 
@@ -71,40 +72,60 @@ function App() {
         <h1>Video Game Olympics</h1>
       </div>
 
+      <Countdown winner={leaderboard[0]?.name} />
+
+      <h2>Leaderboard</h2>
       <table className="leaderboard">
-        <th>Player</th>
-        <th>Points</th>
-        <th />
-        {leaderboard.map((player, index) => (
+        <thead>
           <tr>
-            <td className="playerName">
-              <img className="avatar" src={player.avatar} alt="Player avatar" />
-              {player.name}
-            </td>
-            <td className="alignCenter">{player.points}</td>
-            <td className="lessPadding">{getMedal(index)}</td>
+            <th>Player</th>
+            <th>Points</th>
+            <th />
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {leaderboard.map((player, index) => (
+            <tr key={player.name}>
+              <td className="playerName">
+                <img
+                  className="avatar"
+                  src={player.avatar}
+                  alt="Player avatar"
+                />
+                {player.name}
+              </td>
+              <td className="alignCenter">{player.points}</td>
+              <td className="lessPadding">{getMedal(index)}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
 
-      <table className="topChallenges">
-        <th>Challenge Name</th>
-        <th>🥇 Points</th>
-        <th>🥇 Winner</th>
-        <th>🥈 Points</th>
-        <th>🥈 Winner</th>
-        {challenges.map((challenge) => (
+      <h2>All challenges</h2>
+      <table className="challenges">
+        <thead>
           <tr>
-            <td>{challenge.name}</td>
-            <td className="alignCenter">{challenge.goldVal}</td>
-            <td className="alignCenter">{challenge.goldWinner}</td>
-            <td className="alignCenter">{challenge.silverVal}</td>
-            <td className="alignCenter">{challenge.silverWinner}</td>
+            <th>Challenge Name</th>
+            <th>🥇 Points</th>
+            <th>🥇 Winner</th>
+            <th>🥈 Points</th>
+            <th>🥈 Winner</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {challenges.map((challenge) => (
+            <tr key={challenge.name}>
+              <td>{challenge.name}</td>
+              <td className="alignCenter">{challenge.goldVal}</td>
+              <td className="alignCenter">{challenge.goldWinner}</td>
+              <td className="alignCenter">{challenge.silverVal}</td>
+              <td className="alignCenter">{challenge.silverWinner}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
-}
+};
 
 export default App;
