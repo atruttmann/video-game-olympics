@@ -51,6 +51,19 @@ function App() {
     };
   }, []);
 
+  const getMedal = (index) => {
+    switch (index) {
+      case 0:
+        return "🥇";
+      case 1:
+        return "🥈";
+      case 2:
+        return "🥉";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className="app">
       <div className="header">
@@ -61,13 +74,15 @@ function App() {
       <table className="leaderboard">
         <th>Player</th>
         <th>Points</th>
-        {leaderboard.map((player) => (
+        <th />
+        {leaderboard.map((player, index) => (
           <tr>
             <td className="playerName">
               <img className="avatar" src={player.avatar} alt="Player avatar" />
               {player.name}
             </td>
-            <td>{player.points}</td>
+            <td className="alignCenter">{player.points}</td>
+            <td className="lessPadding">{getMedal(index)}</td>
           </tr>
         ))}
       </table>

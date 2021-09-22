@@ -36,6 +36,9 @@
       transition: ease 0.25s;
       font-weight: bold;
     }
+    .lessPadding {
+      padding: 10px 0;
+    }
     .alignCenter {
       text-align: center;
     }
@@ -50,7 +53,7 @@
     .avatar {
       height: 40px;
       border-radius: 100%;
-      margin-right: 15px;
+      margin-right: 20px;
     }
   }
 }
