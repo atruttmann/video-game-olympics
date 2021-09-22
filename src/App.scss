@@ -43,6 +43,9 @@
     td {
       padding: 10px 50px 10px 10px;
       border-bottom: 1px solid black;
+      &:last-child {
+        padding-right: 10px;
+      }
     }
     th {
       white-space: nowrap;
@@ -51,9 +54,6 @@
       background-color: #fff8ab;
       transition: ease 0.25s;
       font-weight: bold;
-    }
-    .lessPadding {
-      padding: 10px 0;
     }
     .alignCenter {
       text-align: center;
@@ -70,6 +70,12 @@
       height: 40px;
       border-radius: 100%;
       margin-right: 20px;
+    }
+    .points {
+      padding-right: 10px;
+    }
+    .medal {
+      padding-left: 0;
     }
   }
 

@@ -108,7 +108,7 @@ const App = () => {
             <thead>
               <tr>
                 <th>Player</th>
-                <th>Points</th>
+                <th className="points">Points</th>
                 <th />
               </tr>
             </thead>
@@ -123,8 +123,8 @@ const App = () => {
                     />
                     {player.name}
                   </td>
-                  <td className="alignCenter">{player.points}</td>
-                  <td className="lessPadding">{getMedal(index)}</td>
+                  <td className="alignCenter points">{player.points}</td>
+                  <td className="medal">{getMedal(index)}</td>
                 </tr>
               ))}
             </tbody>
