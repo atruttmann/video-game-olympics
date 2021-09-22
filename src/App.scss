@@ -3,7 +3,7 @@
 .app {
   font-family: "Share Tech Mono", monospace;
   font-size: 1.25rem;
-  padding: 40px;
+  padding: 40px 40px 60px 40px;
 
   h1,
   h2 {
@@ -30,6 +30,12 @@
     }
   }
 
+  .twoColumn {
+    display: flex;
+    width: 100%;
+    margin-bottom: 100px;
+  }
+
   table {
     text-align: left;
     border-spacing: 0;
@@ -41,7 +47,11 @@
     th {
       white-space: nowrap;
     }
-
+    tbody tr:hover:not(.completed) {
+      background-color: #fff8ab;
+      transition: ease 0.25s;
+      font-weight: bold;
+    }
     .lessPadding {
       padding: 10px 0;
     }
@@ -51,8 +61,7 @@
   }
 
   .leaderboard {
-    font-size: 1.5rem;
-    margin-bottom: 100px;
+    margin-right: 60px;
     .playerName {
       display: flex;
       align-items: center;
@@ -67,11 +76,6 @@
   .challenges {
     .completed {
       color: gray;
-    }
-    tr:hover:not(.completed) {
-      background-color: #fffc9c;
-      transition: ease 0.25s;
-      font-weight: bold;
     }
   }
 
@@ -90,6 +94,7 @@
         font-size: 2.25rem;
         color: crimson;
         font-family: "Press Start 2P", monospace;
+        margin-bottom: 10px;
       }
     }
     .gameOver {

@@ -70,6 +70,28 @@ const App = () => {
     return "";
   };
 
+  const getTopChallenges = () => {
+    // Filter out any completed challenges
+    let topChallenges = challenges.filter(
+      (challenge) =>
+        !(challenge.goldWinner !== "" && challenge.silverWinner !== "")
+    );
+
+    // Figure out how many points each challenge has,
+    // accounting for if there is a gold winner
+    topChallenges.forEach((challenge) => {
+      let points = challenge.goldVal;
+      if (challenge.goldWinner !== "") points = challenge.silverVal;
+      challenge.points = points;
+    });
+
+    // Sort challenges by points
+    topChallenges.sort((a, b) => b.points - a.points);
+
+    // Return top 5 challenges
+    return topChallenges.slice(0, 5);
+  };
+
   return (
     <div className="app">
       <div className="header">
@@ -79,32 +101,56 @@ const App = () => {
 
       <Countdown winner={leaderboard[0]?.name} />
 
-      <h2>Leaderboard</h2>
-      <table className="leaderboard">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Points</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboard.map((player, index) => (
-            <tr key={player.name}>
-              <td className="playerName">
-                <img
-                  className="avatar"
-                  src={player.avatar}
-                  alt="Player avatar"
-                />
-                {player.name}
-              </td>
-              <td className="alignCenter">{player.points}</td>
-              <td className="lessPadding">{getMedal(index)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="twoColumn">
+        <div>
+          <h2>Leaderboard</h2>
+          <table className="leaderboard">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Points</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {leaderboard.map((player, index) => (
+                <tr key={player.name}>
+                  <td className="playerName">
+                    <img
+                      className="avatar"
+                      src={player.avatar}
+                      alt="Player avatar"
+                    />
+                    {player.name}
+                  </td>
+                  <td className="alignCenter">{player.points}</td>
+                  <td className="lessPadding">{getMedal(index)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2>Top challenges</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Challenge Name</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {getTopChallenges().map((challenge) => (
+                <tr key={challenge.name}>
+                  <td>{challenge.name}</td>
+                  <td className="alignCenter">{challenge.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <h2>All challenges</h2>
       <table className="challenges">
