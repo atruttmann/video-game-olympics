@@ -81,8 +81,13 @@ const App = () => {
     // accounting for if there is a gold winner
     topChallenges.forEach((challenge) => {
       let points = challenge.goldVal;
-      if (challenge.goldWinner !== "") points = challenge.silverVal;
+      let color = "gold";
+      if (challenge.goldWinner !== "") {
+        points = challenge.silverVal;
+        color = "silver";
+      }
       challenge.points = points;
+      challenge.color = color;
     });
 
     // Sort challenges by points
@@ -132,7 +137,7 @@ const App = () => {
         </div>
 
         <div>
-          <h2>Top challenges</h2>
+          <h2>Biggest remaining challenges</h2>
           <div className="tableContainer">
             <table>
               <thead>
@@ -143,7 +148,7 @@ const App = () => {
               </thead>
               <tbody>
                 {getTopChallenges().map((challenge) => (
-                  <tr key={challenge.name}>
+                  <tr key={challenge.name} className={challenge.color}>
                     <td>{challenge.name}</td>
                     <td className="alignCenter">{challenge.points}</td>
                   </tr>

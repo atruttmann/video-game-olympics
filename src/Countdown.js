@@ -54,9 +54,7 @@ const Countdown = ({ winner }) => {
   if (gameOver) {
     return (
       <div className="countdown">
-        <h2 className="gameOver">{`Game over! ${
-          winner ?? ""
-        } claims victory 👑`}</h2>
+        <h2 className="gameOver">{`Game over! ${winner ?? ""} wins 👑`}</h2>
       </div>
     );
   }

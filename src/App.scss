@@ -21,6 +21,7 @@ body {
   }
   h2 {
     font-size: 1.5rem;
+    line-height: 2.5rem;
   }
 
   .header {
@@ -65,16 +66,19 @@ body {
     th {
       white-space: nowrap;
     }
-    tbody tr:hover:not(.completed) {
-      background-color: #fff8ab;
-      transition: ease 0.25s;
-      font-weight: bold;
-    }
-    .alignCenter {
+    td.alignCenter {
       text-align: center;
     }
-    .completed {
-      color: gray;
+    tr {
+      &.completed {
+        color: #b2b2b2;
+      }
+      &.gold {
+        background-color: #ffea79;
+      }
+      &.silver {
+        background-color: #e0e0e0;
+      }
     }
   }
 
@@ -99,6 +103,11 @@ body {
 
   .challenges {
     max-width: 100%;
+    tbody tr:hover:not(.completed) {
+      background-color: #c9ebff;
+      transition: ease 0.25s;
+      font-weight: bold;
+    }
   }
 
   .countdown {
@@ -150,6 +159,7 @@ body {
     }
     h2 {
       font-size: 1rem;
+      line-height: 2rem;
     }
     .header .logo {
       width: 130px;
