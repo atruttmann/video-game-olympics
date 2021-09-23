@@ -129,7 +129,9 @@ const App = () => {
                     {player.name}
                   </td>
                   <td className="alignCenter points">{player.points}</td>
-                  <td className="medal">{getMedal(index)}</td>
+                  <td className="medal">
+                    {player.points > 0 && getMedal(index)}
+                  </td>
                 </tr>
               ))}
             </tbody>
