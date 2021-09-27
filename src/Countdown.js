@@ -31,6 +31,7 @@ const Countdown = ({ winner }) => {
         setHours(hours);
         setMinutes(minutes);
         setSeconds(seconds);
+        setCustomStatus(null);
       }
     };
 
@@ -39,7 +40,7 @@ const Countdown = ({ winner }) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [winner]);
 
   const getFormattedTime = (time) => {
     if (time < 10) return `0${time}`;
