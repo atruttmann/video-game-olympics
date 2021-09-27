@@ -5,28 +5,23 @@ const Countdown = ({ winner }) => {
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
-  const [gameOver, setGameOver] = useState(false);
+  const [customStatus, setCustomStatus] = useState(null);
 
   useEffect(() => {
     // Note that when it's regular (non-daylight savings) time it should be GMT-0800
     // Make sure to use military time
-    const startTime = Date.parse("Oct 2, 2021 12:00:00 GMT-0700");
-    const endTime = Date.parse("Oct 2, 2021 16:00:00 GMT-0700");
+    const startTime = Date.parse("Sept 26, 2021 17:40:00 GMT-0700");
+    const endTime = Date.parse("Sept 26, 2021 19:40:00 GMT-0700");
 
     const updateClock = () => {
       const currentTime = Date.now();
 
-      if (currentTime > endTime) {
-        setGameOver(true);
+      if (currentTime < startTime) {
+        setCustomStatus("Game has not started.");
+      } else if (currentTime > endTime) {
+        setCustomStatus(`Game over! ${winner ?? ""} wins.`);
       } else {
-        let deadline;
-        if (currentTime < startTime) {
-          deadline = startTime;
-        } else {
-          deadline = endTime;
-        }
-
-        const t = deadline - new Date().getTime();
+        const t = endTime - new Date().getTime();
         const seconds = Math.floor((t / 1000) % 60);
         const minutes = Math.floor((t / 1000 / 60) % 60);
         const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
@@ -51,10 +46,10 @@ const Countdown = ({ winner }) => {
     return time;
   };
 
-  if (gameOver) {
+  if (customStatus) {
     return (
       <div className="countdown">
-        <h2 className="gameOver">{`Game over! ${winner ?? ""} wins 👑`}</h2>
+        <h2 className="customStatus">{customStatus}</h2>
       </div>
     );
   }

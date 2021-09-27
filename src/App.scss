@@ -124,11 +124,11 @@ body {
     .time {
       font-weight: bold;
       font-size: 2.25rem;
-      color: crimson;
       font-family: "Press Start 2P", monospace;
       margin-bottom: 10px;
     }
-    .gameOver {
+    .customStatus,
+    .time {
       color: crimson;
     }
   }
