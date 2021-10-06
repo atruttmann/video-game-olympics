@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 const Countdown = ({ winner }) => {
-  const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
@@ -25,9 +24,7 @@ const Countdown = ({ winner }) => {
         const seconds = Math.floor((t / 1000) % 60);
         const minutes = Math.floor((t / 1000 / 60) % 60);
         const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-        const days = Math.floor(t / (1000 * 60 * 60 * 24));
 
-        setDays(days);
         setHours(hours);
         setMinutes(minutes);
         setSeconds(seconds);
@@ -56,12 +53,6 @@ const Countdown = ({ winner }) => {
   }
   return (
     <div className="countdown">
-      {days > 0 && (
-        <div className="timeItem">
-          <div className="time">{days}</div>
-          Days
-        </div>
-      )}
       <div className="timeItem">
         <div className="time">{getFormattedTime(hours)}</div>
         Hours
