@@ -37,13 +37,9 @@ body {
     }
   }
 
-  .twoColumn,
+  .leaderboard,
   .countdown {
     margin-bottom: 60px;
-  }
-
-  .twoColumn {
-    display: flex;
   }
 
   .tableContainer {
@@ -62,6 +58,12 @@ body {
       &:last-child {
         padding-right: 10px;
       }
+      &.points {
+        padding-left: 10px;
+      }
+      &.medal {
+        padding-right: 0;
+      }
     }
     th {
       white-space: nowrap;
@@ -69,21 +71,18 @@ body {
     td.alignCenter {
       text-align: center;
     }
-    tr {
-      &.completed {
-        color: #b2b2b2;
-      }
-      &.gold {
-        background-color: #ffea79;
-      }
-      &.silver {
-        background-color: #e0e0e0;
-      }
+    tr.completed {
+      color: #b2b2b2;
     }
   }
 
+  .leaderboard,
+  .challenges {
+    max-width: 100%;
+  }
+
   .leaderboard {
-    margin-right: 60px;
+    font-size: 1.5rem;
     .playerName {
       display: flex;
       align-items: center;
@@ -93,16 +92,9 @@ body {
       border-radius: 100%;
       margin-right: 20px;
     }
-    .points {
-      padding-right: 10px;
-    }
-    .medal {
-      padding-left: 0;
-    }
   }
 
   .challenges {
-    max-width: 100%;
     tbody tr:hover:not(.completed) {
       background-color: #c9ebff;
       transition: ease 0.25s;
@@ -139,12 +131,8 @@ body {
     h2 {
       text-align: center;
     }
-    .twoColumn {
-      flex-direction: column;
-      justify-content: center;
-    }
     .leaderboard {
-      margin: 0 auto 60px auto;
+      font-size: 1.25rem;
     }
   }
 }
@@ -164,10 +152,12 @@ body {
     .header .logo {
       width: 130px;
     }
-    .twoColumn,
     .countdown,
     .leaderboard {
       margin-bottom: 40px;
+    }
+    .leaderboard {
+      font-size: 1rem;
     }
     .countdown {
       font-size: 1.25rem;

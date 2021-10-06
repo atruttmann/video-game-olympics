@@ -27,6 +27,7 @@ const App = () => {
             name: row.Name,
             points: row.Points,
             avatar: row.Avatar,
+            lockedGames: row["Locked Games"],
           }))
           .sort((a, b) => b.points - a.points)
       );
@@ -41,6 +42,8 @@ const App = () => {
           goldWinner: row["Gold Winner Name"] ?? "",
           silverVal: row["Silver Point Value"],
           silverWinner: row["Silver Winner Name"] ?? "",
+          bronzeVal: row["Bronze Point Value"],
+          bronzeWinner: row["Bronze Winner Name"] ?? "",
         }))
       );
     };
@@ -70,33 +73,6 @@ const App = () => {
     return "";
   };
 
-  const getTopChallenges = () => {
-    // Filter out any completed challenges
-    let topChallenges = challenges.filter(
-      (challenge) =>
-        !(challenge.goldWinner !== "" && challenge.silverWinner !== "")
-    );
-
-    // Figure out how many points each challenge has,
-    // accounting for if there is a gold winner
-    topChallenges.forEach((challenge) => {
-      let points = challenge.goldVal;
-      let color = "gold";
-      if (challenge.goldWinner !== "") {
-        points = challenge.silverVal;
-        color = "silver";
-      }
-      challenge.points = points;
-      challenge.color = color;
-    });
-
-    // Sort challenges by points
-    topChallenges.sort((a, b) => b.points - a.points);
-
-    // Return top 5 challenges
-    return topChallenges.slice(0, 5);
-  };
-
   return (
     <div className="app">
       <div className="header">
@@ -106,58 +82,40 @@ const App = () => {
 
       <Countdown winner={leaderboard[0]?.name} />
 
-      <div className="twoColumn">
-        <div className="leaderboard">
-          <h2>Leaderboard</h2>
+      <div className="leaderboard">
+        <h2>Leaderboard</h2>
+        <div className="tableContainer">
           <table>
             <thead>
               <tr>
-                <th>Player</th>
+                <th className="medal" />
                 <th className="points">Points</th>
-                <th />
+                <th>Player</th>
+                <th>Locked Games</th>
               </tr>
             </thead>
             <tbody>
               {leaderboard.map((player, index) => (
                 <tr key={player.name}>
-                  <td className="playerName">
-                    <img
-                      className="avatar"
-                      src={player.avatar}
-                      alt="Player avatar"
-                    />
-                    {player.name}
-                  </td>
-                  <td className="alignCenter points">{player.points}</td>
                   <td className="medal">
                     {player.points > 0 && getMedal(index)}
                   </td>
+                  <td className="alignCenter points">{player.points}</td>
+                  <td>
+                    <div className="playerName">
+                      <img
+                        className="avatar"
+                        src={player.avatar}
+                        alt="Player avatar"
+                      />
+                      {player.name}
+                    </div>
+                  </td>
+                  <td>{player.lockedGames}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-
-        <div>
-          <h2>Biggest remaining challenges</h2>
-          <div className="tableContainer">
-            <table>
-              <thead>
-                <tr>
-                  <th>Challenge Name</th>
-                  <th>Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {getTopChallenges().map((challenge) => (
-                  <tr key={challenge.name} className={challenge.color}>
-                    <td>{challenge.name}</td>
-                    <td className="alignCenter">{challenge.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
 
@@ -168,10 +126,12 @@ const App = () => {
             <thead>
               <tr>
                 <th>Challenge Name</th>
-                <th>🥇 Points</th>
-                <th>🥇 Winner</th>
-                <th>🥈 Points</th>
-                <th>🥈 Winner</th>
+                <th>🥇</th>
+                <th>Winner</th>
+                <th>🥈</th>
+                <th>Winner</th>
+                <th>🥉</th>
+                <th>Winner</th>
               </tr>
             </thead>
             <tbody>
@@ -185,6 +145,8 @@ const App = () => {
                   <td className="alignCenter">{challenge.goldWinner}</td>
                   <td className="alignCenter">{challenge.silverVal}</td>
                   <td className="alignCenter">{challenge.silverWinner}</td>
+                  <td className="alignCenter">{challenge.bronzeVal}</td>
+                  <td className="alignCenter">{challenge.bronzeWinner}</td>
                 </tr>
               ))}
             </tbody>

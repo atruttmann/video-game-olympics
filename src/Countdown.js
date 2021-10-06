@@ -10,8 +10,8 @@ const Countdown = ({ winner }) => {
   useEffect(() => {
     // Note that when it's regular (non-daylight savings) time it should be GMT-0800
     // Make sure to use military time
-    const startTime = Date.parse("Sept 26, 2021 17:40:00 GMT-0700");
-    const endTime = Date.parse("Sept 26, 2021 19:40:00 GMT-0700");
+    const startTime = Date.parse("Oct 10, 2021 17:30:00 GMT-0700");
+    const endTime = Date.parse("Oct 10, 2021 19:30:00 GMT-0700");
 
     const updateClock = () => {
       const currentTime = Date.now();
