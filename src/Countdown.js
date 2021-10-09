@@ -44,27 +44,26 @@ const Countdown = ({ winner }) => {
     return time;
   };
 
-  if (customStatus) {
-    return (
-      <div className="countdown">
-        <h2 className="customStatus">{customStatus}</h2>
-      </div>
-    );
-  }
   return (
     <div className="countdown">
-      <div className="timeItem">
-        <div className="time">{getFormattedTime(hours)}</div>
-        Hours
-      </div>
-      <div className="timeItem">
-        <div className="time">{getFormattedTime(minutes)}</div>
-        Minutes
-      </div>
-      <div className="timeItem">
-        <div className="time">{getFormattedTime(seconds)}</div>
-        Seconds
-      </div>
+      {customStatus ? (
+        <h2 className="customStatus">{customStatus}</h2>
+      ) : (
+        <>
+          <div className="timeItem">
+            <div className="time">{getFormattedTime(hours)}</div>
+            Hours
+          </div>
+          <div className="timeItem">
+            <div className="time">{getFormattedTime(minutes)}</div>
+            Minutes
+          </div>
+          <div className="timeItem">
+            <div className="time">{getFormattedTime(seconds)}</div>
+            Seconds
+          </div>
+        </>
+      )}
     </div>
   );
 };
