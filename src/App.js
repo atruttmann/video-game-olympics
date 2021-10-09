@@ -69,7 +69,7 @@ const App = () => {
   };
 
   const checkIfCompleted = (challenge) => {
-    if (challenge.silverWinner !== "") return "completed";
+    if (challenge.bronzeWinner !== "") return "completed";
     return "";
   };
 
