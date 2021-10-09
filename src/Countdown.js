@@ -18,7 +18,7 @@ const Countdown = ({ winner }) => {
       if (currentTime < startTime) {
         setCustomStatus("Game has not started.");
       } else if (currentTime > endTime) {
-        setCustomStatus(`Game over!${winner ? ` ${winner} wines.` : ""}`);
+        setCustomStatus(`Game over!${winner ? ` ${winner} wins.` : ""}`);
       } else {
         const t = endTime - new Date().getTime();
         const seconds = Math.floor((t / 1000) % 60);
