@@ -126,11 +126,11 @@ const App = () => {
             <thead>
               <tr>
                 <th>Challenge Name</th>
-                <th>🥇</th>
+                <th className="alignCenter">🥇</th>
                 <th>Winner</th>
-                <th>🥈</th>
+                <th className="alignCenter">🥈</th>
                 <th>Winner</th>
-                <th>🥉</th>
+                <th className="alignCenter">🥉</th>
                 <th>Winner</th>
               </tr>
             </thead>

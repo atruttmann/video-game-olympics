@@ -64,12 +64,12 @@ body {
       &.medal {
         padding-right: 0;
       }
+      &.alignCenter {
+        text-align: center;
+      }
     }
     th {
       white-space: nowrap;
-    }
-    td.alignCenter {
-      text-align: center;
     }
     tr.completed {
       color: #b2b2b2;
