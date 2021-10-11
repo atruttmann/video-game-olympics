@@ -142,11 +142,11 @@ const App = () => {
                 >
                   <td>{challenge.name}</td>
                   <td className="alignCenter">{challenge.goldVal}</td>
-                  <td className="alignCenter">{challenge.goldWinner}</td>
+                  <td>{challenge.goldWinner}</td>
                   <td className="alignCenter">{challenge.silverVal}</td>
-                  <td className="alignCenter">{challenge.silverWinner}</td>
+                  <td>{challenge.silverWinner}</td>
                   <td className="alignCenter">{challenge.bronzeVal}</td>
-                  <td className="alignCenter">{challenge.bronzeWinner}</td>
+                  <td>{challenge.bronzeWinner}</td>
                 </tr>
               ))}
             </tbody>
