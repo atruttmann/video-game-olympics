@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleSpreadsheet } from "google-spreadsheet";
-import Countdown from "./Countdown";
+import Switch from "./components/Switch/Switch";
+import Countdown from "./components/Countdown";
 import Logo from "./logo.jpg";
 import "./App.scss";
 
 const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [challenges, setChallenges] = useState([]);
+  const [hideCompletedChallenges, setHideCompletedChallenges] = useState(false);
 
   useEffect(() => {
     // Initialize the sheet - doc ID is the long id in the sheets URL
     const doc = new GoogleSpreadsheet(
-      "1OuBG8d4xZtw8utOVonv4O3bXJtxcoLnGv-o2TOplDCY"
+      "1KH5Oyg_QoBin8Bq9Jx5Q3VxfjKtVMD2DKN4Nbk7FwYo"
     );
     const creds = require("./config/video-game-olympics-a99675815598.json"); // file with api key
 
@@ -28,6 +30,7 @@ const App = () => {
             points: row.Points,
             avatar: row.Avatar,
             lockedGames: row["Locked Games"],
+            achievements: row.Achievements,
           }))
           .sort((a, b) => b.points - a.points)
       );
@@ -38,6 +41,7 @@ const App = () => {
         challengeRows.map((row) => ({
           name: row["Challenge Name"],
           type: row["Challenge Type"],
+          icon: row["Challenge Icon"],
           goldVal: row["Gold Point Value"],
           goldWinner: row["Gold Winner Name"] ?? "",
           silverVal: row["Silver Point Value"],
@@ -68,11 +72,6 @@ const App = () => {
     }
   };
 
-  const checkIfCompleted = (challenge) => {
-    if (challenge.bronzeWinner !== "") return "completed";
-    return "";
-  };
-
   return (
     <div className="app">
       <div className="header">
@@ -80,79 +79,99 @@ const App = () => {
         <h1>Video Game Olympics</h1>
       </div>
 
-      <Countdown winner={leaderboard[0]?.name} />
+      {leaderboard.length > 0 && challenges.length > 0 ? (
+        <>
+          <Countdown winner={leaderboard[0]?.name} />
 
-      <div className="leaderboard">
-        <h2>Leaderboard</h2>
-        <div className="tableContainer">
-          <table>
-            <thead>
-              <tr>
-                <th className="medal" />
-                <th className="points">Points</th>
-                <th>Player</th>
-                <th>Locked Games</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboard.map((player, index) => (
-                <tr key={player.name}>
-                  <td className="medal">
-                    {player.points > 0 && getMedal(index)}
-                  </td>
-                  <td className="alignCenter points">{player.points}</td>
-                  <td>
-                    <div className="playerName">
-                      <img
-                        className="avatar"
-                        src={player.avatar}
-                        alt="Player avatar"
-                      />
-                      {player.name}
-                    </div>
-                  </td>
-                  <td>{player.lockedGames}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+          <div className="leaderboard">
+            <h2>Leaderboard</h2>
+            <div className="tableContainer">
+              <table>
+                <thead>
+                  <tr>
+                    <th className="medal" />
+                    <th className="points">Points</th>
+                    <th>Player</th>
+                    <th>Achievements</th>
+                    <th>Locked Games</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leaderboard.map((player, index) => (
+                    <tr key={player.name}>
+                      <td className="medal">
+                        {player.points > 0 && getMedal(index)}
+                      </td>
+                      <td className="alignCenter points">{player.points}</td>
+                      <td>
+                        <div className="playerName">
+                          <img className="avatar" src={player.avatar} alt="" />
+                          {player.name}
+                        </div>
+                      </td>
+                      <td className="small">{player.achievements}</td>
+                      <td className="small">{player.lockedGames}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      <div className="challenges">
-        <h2>All challenges</h2>
-        <div className="tableContainer">
-          <table>
-            <thead>
-              <tr>
-                <th>Challenge Name</th>
-                <th className="alignCenter">🥇</th>
-                <th>Winner</th>
-                <th className="alignCenter">🥈</th>
-                <th>Winner</th>
-                <th className="alignCenter">🥉</th>
-                <th>Winner</th>
-              </tr>
-            </thead>
-            <tbody>
-              {challenges.map((challenge) => (
-                <tr
-                  key={challenge.name}
-                  className={checkIfCompleted(challenge)}
-                >
-                  <td>{challenge.name}</td>
-                  <td className="alignCenter">{challenge.goldVal}</td>
-                  <td>{challenge.goldWinner}</td>
-                  <td className="alignCenter">{challenge.silverVal}</td>
-                  <td>{challenge.silverWinner}</td>
-                  <td className="alignCenter">{challenge.bronzeVal}</td>
-                  <td>{challenge.bronzeWinner}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+          <div className="challenges">
+            <h2>All challenges</h2>
+            <Switch
+              toggleSwitch={() =>
+                setHideCompletedChallenges(!hideCompletedChallenges)
+              }
+            >
+              Hide completed challenges
+            </Switch>
+            <div className="tableContainer">
+              <table>
+                <thead>
+                  <tr>
+                    <th />
+                    <th>Challenge Name</th>
+                    <th className="alignCenter">🥇</th>
+                    <th>Winner</th>
+                    <th className="alignCenter">🥈</th>
+                    <th>Winner</th>
+                    <th className="alignCenter">🥉</th>
+                    <th>Winner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {challenges.map((challenge) => {
+                    const completed = challenge.bronzeWinner !== "";
+                    if (completed && hideCompletedChallenges) return null;
+
+                    return (
+                      <tr
+                        key={challenge.name}
+                        className={completed ? "completed" : ""}
+                      >
+                        <td>
+                          <img className="icon" src={challenge.icon} alt="" />
+                        </td>
+                        <td>{challenge.name}</td>
+                        <td className="alignCenter">{challenge.goldVal}</td>
+                        <td>{challenge.goldWinner}</td>
+                        <td className="alignCenter">{challenge.silverVal}</td>
+                        <td>{challenge.silverWinner}</td>
+                        <td className="alignCenter">{challenge.bronzeVal}</td>
+                        <td>{challenge.bronzeWinner}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      ) : (
+        <h2 className="loading">Loading...</h2>
+      )}
     </div>
   );
 };

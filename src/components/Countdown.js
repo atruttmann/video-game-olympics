@@ -4,13 +4,13 @@ const Countdown = ({ winner }) => {
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
-  const [customStatus, setCustomStatus] = useState(null);
+  const [customStatus, setCustomStatus] = useState(" ");
 
   useEffect(() => {
     // Note that when it's regular (non-daylight savings) time it should be GMT-0800
     // Make sure to use military time
-    const startTime = Date.parse("Oct 10, 2021 17:30:00 GMT-0700");
-    const endTime = Date.parse("Oct 10, 2021 19:30:00 GMT-0700");
+    const startTime = Date.parse("Dec 10, 2022 17:30:00 GMT-0700");
+    const endTime = Date.parse("Dec 10, 2022 19:30:00 GMT-0700");
 
     const updateClock = () => {
       const currentTime = Date.now();

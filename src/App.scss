@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap");
 
+$default-font-size: 1.25rem;
+$red: #c80405;
+$blue: #2684e6;
+
 body {
   margin: 0;
 }
 .app {
   font-family: "Share Tech Mono", monospace;
-  font-size: 1.25rem;
+  font-size: $default-font-size;
   padding: 40px 40px 60px 40px;
   display: flex;
   flex-direction: column;
@@ -71,9 +75,6 @@ body {
     th {
       white-space: nowrap;
     }
-    tr.completed {
-      color: #b2b2b2;
-    }
   }
 
   .leaderboard,
@@ -92,13 +93,37 @@ body {
       border-radius: 100%;
       margin-right: 20px;
     }
+    td.small {
+      font-size: $default-font-size;
+    }
   }
 
   .challenges {
-    tbody tr:hover:not(.completed) {
-      background-color: #c9ebff;
-      transition: ease 0.25s;
-      font-weight: bold;
+    tbody tr {
+      &:hover:not(.completed) {
+        background-color: #fff5ca;
+        transition: ease 0.25s;
+        font-weight: bold;
+      }
+      &.completed {
+        color: #b2b2b2;
+        .icon {
+          filter: brightness(0.4);
+        }
+      }
+
+      td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        &:first-child {
+          padding-right: 10px;
+        }
+        .icon {
+          height: 50px;
+          border-radius: 8px;
+          display: block;
+        }
+      }
     }
   }
 
@@ -121,9 +146,13 @@ body {
     }
     .customStatus,
     .time {
-      color: crimson;
+      color: $red;
     }
   }
+}
+
+.loading {
+  color: $blue;
 }
 
 @media screen and (max-width: 768px) {
@@ -132,7 +161,11 @@ body {
       text-align: center;
     }
     .leaderboard {
-      font-size: 1.25rem;
+      font-size: $default-font-size;
+    }
+    .switchContainer {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }
@@ -160,7 +193,7 @@ body {
       font-size: 1rem;
     }
     .countdown {
-      font-size: 1.25rem;
+      font-size: $default-font-size;
 
       .timeItem {
         margin-right: 20px;
