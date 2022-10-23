@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/video-game-olympics/static/css/main.9ab48bd4.chunk.css",
-    "main.js": "/video-game-olympics/static/js/main.0c51cdb5.chunk.js",
-    "main.js.map": "/video-game-olympics/static/js/main.0c51cdb5.chunk.js.map",
+    "main.css": "/video-game-olympics/static/css/main.9a98479d.chunk.css",
+    "main.js": "/video-game-olympics/static/js/main.1f90bf97.chunk.js",
+    "main.js.map": "/video-game-olympics/static/js/main.1f90bf97.chunk.js.map",
     "runtime-main.js": "/video-game-olympics/static/js/runtime-main.992c0a17.js",
     "runtime-main.js.map": "/video-game-olympics/static/js/runtime-main.992c0a17.js.map",
     "static/js/2.497e539e.chunk.js": "/video-game-olympics/static/js/2.497e539e.chunk.js",
     "static/js/2.497e539e.chunk.js.map": "/video-game-olympics/static/js/2.497e539e.chunk.js.map",
     "index.html": "/video-game-olympics/index.html",
-    "static/css/main.9ab48bd4.chunk.css.map": "/video-game-olympics/static/css/main.9ab48bd4.chunk.css.map",
+    "static/css/main.9a98479d.chunk.css.map": "/video-game-olympics/static/css/main.9a98479d.chunk.css.map",
     "static/js/2.497e539e.chunk.js.LICENSE.txt": "/video-game-olympics/static/js/2.497e539e.chunk.js.LICENSE.txt",
     "static/media/logo.7fa2e432.jpg": "/video-game-olympics/static/media/logo.7fa2e432.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.992c0a17.js",
     "static/js/2.497e539e.chunk.js",
-    "static/css/main.9ab48bd4.chunk.css",
-    "static/js/main.0c51cdb5.chunk.js"
+    "static/css/main.9a98479d.chunk.css",
+    "static/js/main.1f90bf97.chunk.js"
   ]
 }
