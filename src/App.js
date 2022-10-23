@@ -83,7 +83,7 @@ const App = () => {
         <>
           <Countdown winner={leaderboard[0]?.name} />
 
-          <div className="leaderboard">
+          <div className="leaderboard section">
             <h2>Leaderboard</h2>
             <div className="tableContainer">
               <table>
@@ -93,7 +93,7 @@ const App = () => {
                     <th className="points">Points</th>
                     <th>Player</th>
                     <th>Achievements</th>
-                    <th>Locked Games</th>
+                    <th>🔒 Locked Games</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,7 +110,9 @@ const App = () => {
                         </div>
                       </td>
                       <td className="small">{player.achievements}</td>
-                      <td className="small">{player.lockedGames}</td>
+                      <td className="small">
+                        <i>{player.lockedGames}</i>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -118,7 +120,7 @@ const App = () => {
             </div>
           </div>
 
-          <div className="challenges">
+          <div className="challenges section">
             <h2>All challenges</h2>
             <Switch
               toggleSwitch={() =>
@@ -131,7 +133,6 @@ const App = () => {
               <table>
                 <thead>
                   <tr>
-                    <th />
                     <th>Challenge Name</th>
                     <th className="alignCenter">🥇</th>
                     <th>Winner</th>
@@ -152,9 +153,11 @@ const App = () => {
                         className={completed ? "completed" : ""}
                       >
                         <td>
-                          <img className="icon" src={challenge.icon} alt="" />
+                          <div className="challengeDetails">
+                            <img className="icon" src={challenge.icon} alt="" />
+                            {challenge.name}
+                          </div>
                         </td>
-                        <td>{challenge.name}</td>
                         <td className="alignCenter">{challenge.goldVal}</td>
                         <td>{challenge.goldWinner}</td>
                         <td className="alignCenter">{challenge.silverVal}</td>

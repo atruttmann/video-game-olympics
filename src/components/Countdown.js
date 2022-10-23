@@ -45,7 +45,7 @@ const Countdown = ({ winner }) => {
   };
 
   return (
-    <div className="countdown">
+    <div className="countdown section">
       {customStatus ? (
         <h2 className="customStatus">{customStatus}</h2>
       ) : (

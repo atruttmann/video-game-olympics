@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap");
-
-$default-font-size: 1.25rem;
-$red: #c80405;
-$blue: #2684e6;
+@import "variables";
 
 body {
   margin: 0;
@@ -10,7 +7,7 @@ body {
 .app {
   font-family: "Share Tech Mono", monospace;
   font-size: $default-font-size;
-  padding: 40px 40px 60px 40px;
+  padding: 60px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +21,7 @@ body {
     line-height: 3.5rem;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: $heading-font-size;
     line-height: 2.5rem;
   }
 
@@ -41,9 +38,11 @@ body {
     }
   }
 
-  .leaderboard,
-  .countdown {
-    margin-bottom: 60px;
+  .section {
+    max-width: 100%;
+    &:not(:last-child) {
+      margin-bottom: 60px;
+    }
   }
 
   .tableContainer {
@@ -55,10 +54,13 @@ body {
     text-align: left;
     border-spacing: 0;
     margin: auto;
+    thead {
+      font-size: $heading-font-size;
+    }
     th,
     td {
-      padding: 10px 50px 10px 10px;
-      border-bottom: 1px solid black;
+      padding: 10px 40px 10px 10px;
+      border-bottom: 1px solid $light-gray;
       &:last-child {
         padding-right: 10px;
       }
@@ -71,42 +73,39 @@ body {
       &.alignCenter {
         text-align: center;
       }
+      &.small {
+        font-size: $default-font-size;
+      }
     }
     th {
       white-space: nowrap;
     }
   }
 
-  .leaderboard,
-  .challenges {
-    max-width: 100%;
-  }
-
   .leaderboard {
-    font-size: 1.5rem;
+    font-size: $heading-font-size;
     .playerName {
       display: flex;
       align-items: center;
-    }
-    .avatar {
-      height: 40px;
-      border-radius: 100%;
-      margin-right: 20px;
-    }
-    td.small {
-      font-size: $default-font-size;
+
+      .avatar {
+        height: 35px;
+        border-radius: 100%;
+        margin-right: 10px;
+        border: 1px solid black;
+      }
     }
   }
 
   .challenges {
     tbody tr {
       &:hover:not(.completed) {
-        background-color: #fff5ca;
+        background-color: $light-yellow;
         transition: ease 0.25s;
         font-weight: bold;
       }
       &.completed {
-        color: #b2b2b2;
+        color: $light-gray;
         .icon {
           filter: brightness(0.4);
         }
@@ -115,13 +114,17 @@ body {
       td {
         padding-top: 5px;
         padding-bottom: 5px;
-        &:first-child {
-          padding-right: 10px;
-        }
-        .icon {
-          height: 50px;
-          border-radius: 8px;
-          display: block;
+        .challengeDetails {
+          display: flex;
+          align-items: center;
+          .icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 6px;
+            display: block;
+            border: 1px solid black;
+            margin-right: 15px;
+          }
         }
       }
     }
@@ -160,7 +163,9 @@ body {
     h2 {
       text-align: center;
     }
-    .leaderboard {
+    .leaderboard,
+    table thead,
+    table td.small {
       font-size: $default-font-size;
     }
     .switchContainer {
@@ -185,11 +190,12 @@ body {
     .header .logo {
       width: 130px;
     }
-    .countdown,
-    .leaderboard {
+    .section:not(:last-child) {
       margin-bottom: 40px;
     }
-    .leaderboard {
+    .leaderboard,
+    table thead,
+    table td.small {
       font-size: 1rem;
     }
     .countdown {
@@ -199,7 +205,7 @@ body {
         margin-right: 20px;
       }
       .time {
-        font-size: 1.5rem;
+        font-size: $heading-font-size;
       }
     }
   }
