@@ -7,10 +7,7 @@ body {
 .app {
   font-family: "Share Tech Mono", monospace;
   font-size: $default-font-size;
-  padding: 60px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 80px;
 
   h1,
   h2 {
@@ -37,144 +34,22 @@ body {
       margin-bottom: 10px;
     }
   }
-
-  .section {
-    max-width: 100%;
-    &:not(:last-child) {
-      margin-bottom: 60px;
-    }
-  }
-
-  .tableContainer {
-    width: 100%;
-    overflow: auto;
-  }
-
-  table {
-    text-align: left;
-    border-spacing: 0;
+  .loading {
+    color: $blue;
+    width: fit-content;
     margin: auto;
-    thead {
-      font-size: $heading-font-size;
-    }
-    th,
-    td {
-      padding: 10px 40px 10px 10px;
-      border-bottom: 1px solid $light-gray;
-      &:last-child {
-        padding-right: 10px;
-      }
-      &.points {
-        padding-left: 10px;
-      }
-      &.medal {
-        padding-right: 0;
-      }
-      &.alignCenter {
-        text-align: center;
-      }
-      &.small {
-        font-size: $default-font-size;
-      }
-    }
-    th {
-      white-space: nowrap;
-    }
-  }
-
-  .leaderboard {
-    font-size: $heading-font-size;
-    .playerName {
-      display: flex;
-      align-items: center;
-
-      .avatar {
-        height: 35px;
-        border-radius: 100%;
-        margin-right: 10px;
-        border: 1px solid black;
-      }
-    }
-  }
-
-  .challenges {
-    tbody tr {
-      &:hover:not(.completed) {
-        background-color: $light-yellow;
-        transition: ease 0.25s;
-        font-weight: bold;
-      }
-      &.completed {
-        color: $light-gray;
-        .icon {
-          filter: brightness(0.4);
-        }
-      }
-
-      td {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        .challengeDetails {
-          display: flex;
-          align-items: center;
-          .icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 6px;
-            display: block;
-            border: 1px solid black;
-            margin-right: 15px;
-          }
-        }
-      }
-    }
-  }
-
-  .countdown {
-    display: flex;
-    font-size: 1.75rem;
-    text-align: center;
-
-    .timeItem {
-      margin-right: 40px;
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-    .time {
-      font-weight: bold;
-      font-size: 2.25rem;
-      font-family: "Press Start 2P", monospace;
-      margin-bottom: 10px;
-    }
-    .customStatus,
-    .time {
-      color: $red;
-    }
   }
 }
 
-.loading {
-  color: $blue;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $breakpoint-md) {
   .app {
+    padding: 40px;
     h2 {
       text-align: center;
     }
-    .leaderboard,
-    table thead,
-    table td.small {
-      font-size: $default-font-size;
-    }
-    .switchContainer {
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: $breakpoint-sm) {
   .app {
     padding: 20px;
     font-size: 1rem;
@@ -189,24 +64,6 @@ body {
     }
     .header .logo {
       width: 130px;
-    }
-    .section:not(:last-child) {
-      margin-bottom: 40px;
-    }
-    .leaderboard,
-    table thead,
-    table td.small {
-      font-size: 1rem;
-    }
-    .countdown {
-      font-size: $default-font-size;
-
-      .timeItem {
-        margin-right: 20px;
-      }
-      .time {
-        font-size: $heading-font-size;
-      }
     }
   }
 }
