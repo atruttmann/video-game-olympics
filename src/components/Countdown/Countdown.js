@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Countdown.scss";
 
-const Countdown = ({ winner }) => {
+const Countdown = ({ startTime, endTime, winner }) => {
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
   const [customStatus, setCustomStatus] = useState(" ");
 
   useEffect(() => {
-    // Note that when it's regular (non-daylight savings) time it should be GMT-0800
-    // Make sure to use military time
-    const startTime = Date.parse("Dec 10, 2022 17:30:00 GMT-0700");
-    const endTime = Date.parse("Dec 10, 2022 19:30:00 GMT-0700");
-
     const updateClock = () => {
       const currentTime = Date.now();
 
@@ -38,7 +33,7 @@ const Countdown = ({ winner }) => {
     return () => {
       clearInterval(interval);
     };
-  }, [winner]);
+  }, [winner, startTime, endTime]);
 
   const getFormattedTime = (time) => {
     if (time < 10) return `0${time}`;

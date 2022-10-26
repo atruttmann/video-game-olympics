@@ -7,10 +7,19 @@ import Challenges from "./components/Challenges";
 import Logo from "./logo.jpg";
 import "./App.scss";
 
+const password = "theobaby";
+
+// Note that when it's regular (non-daylight savings) time it should be GMT-0800
+// Make sure to use military time
+const startTime = Date.parse("November 13, 2022 17:30:00 GMT-0800");
+const endTime = Date.parse("November 13, 2022 19:30:00 GMT-0800");
+
 const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [challenges, setChallenges] = useState([]);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [locked, setLocked] = useState(Date.now() < startTime);
 
   useEffect(() => {
     // Initialize the sheet - doc ID is the long id in the sheets URL
@@ -78,9 +87,24 @@ const App = () => {
         <h1>Video Game Olympics</h1>
       </div>
 
-      {leaderboard.length > 0 && challenges.length > 0 ? (
+      {locked ? (
+        <div className="password">
+          <input
+            type="password"
+            onChange={(e) => setPasswordInput(e.target.value)}
+            value={passwordInput}
+          />
+          <button onClick={() => setLocked(!(passwordInput === password))}>
+            Submit
+          </button>
+        </div>
+      ) : leaderboard.length > 0 && challenges.length > 0 ? (
         <>
-          <Countdown winner={leaderboard[0]?.name} />
+          <Countdown
+            startTime={startTime}
+            endTime={endTime}
+            winner={leaderboard[0]?.name}
+          />
           <Leaderboard leaderboard={leaderboard} />
           <Achievements achievements={achievements} leaderboard={leaderboard} />
           <Challenges challenges={challenges} />

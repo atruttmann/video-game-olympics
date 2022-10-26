@@ -39,6 +39,12 @@ body {
     width: fit-content;
     margin: auto;
   }
+  .password {
+    text-align: center;
+    input {
+      margin-right: 10px;
+    }
+  }
 }
 
 @media screen and (max-width: $breakpoint-md) {
