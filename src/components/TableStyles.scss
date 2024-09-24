@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .section {
   max-width: 100%;
@@ -19,7 +19,7 @@
       th,
       td {
         padding: 10px 40px 10px 10px;
-        border-bottom: 1px solid $light-gray;
+        border-bottom: 1px solid $gray;
         &:last-child {
           padding-right: 10px;
         }
@@ -69,12 +69,12 @@
   &.challenges {
     tbody tr {
       &:hover:not(.completed) {
-        background-color: $light-yellow;
+        background-color: $table-highlight;
         transition: ease 0.25s;
         font-weight: bold;
       }
       &.completed {
-        color: $light-gray;
+        color: $gray;
         .icon {
           filter: brightness(0.4);
         }

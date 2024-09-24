@@ -1,17 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap");
-@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+@import 'variables';
 
 body {
   margin: 0;
+  cursor: url('./assets/cursor.png'), auto;
 }
+
+:root {
+  color-scheme: dark;
+}
+
+::selection {
+  background: $green;
+}
+
 .app {
-  font-family: "Share Tech Mono", monospace;
+  font-family: 'Share Tech Mono', monospace;
   font-size: $default-font-size;
   padding: 80px;
+  height: 100%;
+  min-height: calc(100vh - 80px * 2);
+  background-color: black;
+  color: white;
 
   h1,
   h2 {
-    font-family: "Press Start 2P", monospace;
+    font-family: 'Press Start 2P', monospace;
   }
   h1 {
     font-size: 2.5rem;

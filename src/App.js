@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { GoogleSpreadsheet } from "google-spreadsheet";
-import Countdown from "./components/Countdown/Countdown";
-import Leaderboard from "./components/Leaderboard";
-import Achievements from "./components/Achievements";
-import Challenges from "./components/Challenges";
-import Logo from "./logo.jpg";
-import "./App.scss";
+import React, { useEffect, useState } from 'react';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import Countdown from './components/Countdown/Countdown';
+import Leaderboard from './components/Leaderboard';
+import Achievements from './components/Achievements';
+import Challenges from './components/Challenges';
+import Logo from './assets/logo.png';
+import './App.scss';
 
-const password = "theobaby";
+const password = 'theobaby';
 
 // Note that when it's regular (non-daylight savings) time it should be GMT-0800. Otherwise GMT-0700.
 // Make sure to use military time
-const startTime = Date.parse("November 13, 2022 17:15:00 GMT-0800");
-const endTime = Date.parse("November 13, 2022 19:30:00 GMT-0800");
+const startTime = Date.parse('October 1, 2024 18:00:00 GMT-0700');
+const endTime = Date.parse('October 1, 2024 20:00:00 GMT-0700');
 
 const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [challenges, setChallenges] = useState([]);
-  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState('');
   const [locked, setLocked] = useState(Date.now() < startTime);
 
   useEffect(() => {
     // Initialize the sheet - doc ID is the long id in the sheets URL
     const doc = new GoogleSpreadsheet(
-      "1KH5Oyg_QoBin8Bq9Jx5Q3VxfjKtVMD2DKN4Nbk7FwYo"
+      '1Y5AIh07HlnC99gngiiJvrtgLHPkzURk5jJfgJ6gQX4Q'
     );
-    const creds = require("./config/video-game-olympics-a99675815598.json"); // file with api key
+    const creds = require('./config/creds.json'); // file with api key
 
     const fetchData = async () => {
       await doc.useServiceAccountAuth(creds);
@@ -40,41 +40,41 @@ const App = () => {
             name: row.Name,
             points: row.Points,
             avatar: row.Avatar,
-            lockedGames: row["Locked Games"],
+            lockedGames: row['Locked Games'],
           }))
           .sort((a, b) => b.points - a.points)
       );
 
-      const achievementsSheet = doc.sheetsByIndex[1];
+      const achievementsSheet = doc.sheetsByIndex[2];
       const achievementsRows = await achievementsSheet.getRows();
       setAchievements(
         achievementsRows.map((row) => ({
           description: row.Description,
           icon: row.Icon,
           points: row.Points,
-          currentHolder: row["Current holder"],
+          currentHolder: row['Current holder'],
         }))
       );
 
-      const challengesSheet = doc.sheetsByIndex[2];
+      const challengesSheet = doc.sheetsByIndex[1];
       const challengeRows = await challengesSheet.getRows();
       setChallenges(
         challengeRows.map((row) => ({
-          name: row["Challenge Name"],
-          type: row["Challenge Type"],
-          icon: row["Challenge Icon"],
-          goldVal: row["Gold Point Value"],
-          goldWinner: row["Gold Winner Name"] ?? "",
-          silverVal: row["Silver Point Value"],
-          silverWinner: row["Silver Winner Name"] ?? "",
-          bronzeVal: row["Bronze Point Value"],
-          bronzeWinner: row["Bronze Winner Name"] ?? "",
+          name: row['Challenge Name'],
+          type: row['Challenge Type'],
+          icon: row['Challenge Icon'],
+          goldVal: row['Gold Point Value'],
+          goldWinner: row['Gold Winner Name'] ?? '',
+          silverVal: row['Silver Point Value'],
+          silverWinner: row['Silver Winner Name'] ?? '',
+          bronzeVal: row['Bronze Point Value'],
+          bronzeWinner: row['Bronze Winner Name'] ?? '',
         }))
       );
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 5000); // pull data every 5 seconds
+    const interval = setInterval(fetchData, 10000); // pull data every 10 seconds
     return () => {
       clearInterval(interval);
     };

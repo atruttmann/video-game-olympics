@@ -1,4 +1,4 @@
-@import "../../variables";
+@import '../../variables';
 
 $slider-size: 20px;
 $slider-padding: 4px;
@@ -40,12 +40,12 @@ $slider-transition: 0.4s;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: $light-gray;
+      background-color: $gray;
       transition: $slider-transition;
 
       &:before {
         position: absolute;
-        content: "";
+        content: '';
         height: $slider-size;
         width: $slider-size;
         left: $slider-padding;
@@ -54,7 +54,7 @@ $slider-transition: 0.4s;
         transition: $slider-transition;
       }
       &:hover {
-        background-color: $medium-gray;
+        background-color: $green;
       }
     }
   }
