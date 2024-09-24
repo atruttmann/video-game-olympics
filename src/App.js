@@ -11,7 +11,7 @@ const password = 'theobaby';
 
 // Note that when it's regular (non-daylight savings) time it should be GMT-0800. Otherwise GMT-0700.
 // Make sure to use military time
-const startTime = Date.parse('October 1, 2024 18:00:00 GMT-0700');
+const startTime = Date.parse('October 1, 2024 17:30:00 GMT-0700');
 const endTime = Date.parse('October 1, 2024 20:00:00 GMT-0700');
 
 const App = () => {
