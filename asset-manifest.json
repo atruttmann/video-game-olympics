@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/video-game-olympics/static/css/main.3059380c.chunk.css",
-    "main.js": "/video-game-olympics/static/js/main.fb23b078.chunk.js",
-    "main.js.map": "/video-game-olympics/static/js/main.fb23b078.chunk.js.map",
+    "main.js": "/video-game-olympics/static/js/main.d1d6665b.chunk.js",
+    "main.js.map": "/video-game-olympics/static/js/main.d1d6665b.chunk.js.map",
     "runtime-main.js": "/video-game-olympics/static/js/runtime-main.992c0a17.js",
     "runtime-main.js.map": "/video-game-olympics/static/js/runtime-main.992c0a17.js.map",
     "static/js/2.96e73f39.chunk.js": "/video-game-olympics/static/js/2.96e73f39.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.992c0a17.js",
     "static/js/2.96e73f39.chunk.js",
     "static/css/main.3059380c.chunk.css",
-    "static/js/main.fb23b078.chunk.js"
+    "static/js/main.d1d6665b.chunk.js"
   ]
 }
