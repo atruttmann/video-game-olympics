@@ -11,8 +11,8 @@ const password = 'theobaby';
 
 // Note that when it's regular (non-daylight savings) time it should be GMT-0800. Otherwise GMT-0700.
 // Make sure to use military time
-const startTime = Date.parse('October 1, 2024 17:30:00 GMT-0700');
-const endTime = Date.parse('October 1, 2024 20:00:00 GMT-0700');
+const startTime = Date.parse('April 19, 2025 17:30:00 GMT-0700');
+const endTime = Date.parse('April 19, 2025 20:00:00 GMT-0700');
 
 const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     // Initialize the sheet - doc ID is the long id in the sheets URL
     const doc = new GoogleSpreadsheet(
-      '1Y5AIh07HlnC99gngiiJvrtgLHPkzURk5jJfgJ6gQX4Q'
+      '1Qe37JSKsgzrF0X2rHM0jp2XOCibZPgHTYy9nmvZS3Hw'
     );
     const creds = require('./config/creds.json'); // file with api key
 
