@@ -11,8 +11,8 @@ const password = 'theobaby';
 
 // Note that when it's regular (non-daylight savings) time it should be GMT-0800. Otherwise GMT-0700.
 // Make sure to use military time
-const startTime = Date.parse('August 10, 2025 17:30:00 GMT-0700');
-const endTime = Date.parse('August 10, 2025 20:00:00 GMT-0700');
+const startTime = Date.parse('November 23, 2025 17:30:00 GMT-0800');
+const endTime = Date.parse('November 23, 2025 20:00:00 GMT-000');
 
 const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     // Initialize the sheet - doc ID is the long id in the sheets URL
     const doc = new GoogleSpreadsheet(
-      '1Ro0dAbWXEqr9V_EcxXC72oW9jA4RQC1aBK6mM5sqw5k'
+      '112gO9W-9l5pReDnpduCKB-iYAeka2-VOFYM-HhgYCyQ'
     );
     const creds = require('./config/creds.json'); // file with api key
 
@@ -81,16 +81,16 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
-      <div className="header">
-        <img src={Logo} className="logo" alt="Olympic rings logo" />
+    <div className='app'>
+      <div className='header'>
+        <img src={Logo} className='logo' alt='Olympic rings logo' />
         <h1>Video Game Olympics</h1>
       </div>
 
       {locked ? (
-        <div className="password">
+        <div className='password'>
           <input
-            type="password"
+            type='password'
             onChange={(e) => setPasswordInput(e.target.value)}
             value={passwordInput}
           />
@@ -110,7 +110,7 @@ const App = () => {
           <Challenges challenges={challenges} />
         </>
       ) : (
-        <h2 className="loading">Loading...</h2>
+        <h2 className='loading'>Loading...</h2>
       )}
     </div>
   );
