@@ -1,29 +1,37 @@
-import React, { useEffect, useState } from "react";
-import "./Countdown.scss";
+import { useEffect, useState } from 'react';
+import './Countdown.scss';
 
-const Countdown = ({ startTime, endTime, winner }) => {
-  const [hours, setHours] = useState();
-  const [minutes, setMinutes] = useState();
-  const [seconds, setSeconds] = useState();
-  const [customStatus, setCustomStatus] = useState(" ");
+type CountdownProps = {
+  startTime: number;
+  endTime: number;
+  winner?: string;
+};
+
+const getFormattedTime = (time: number) => {
+  if (time < 10) return `0${time}`;
+  return time.toString();
+};
+
+const Countdown = ({ startTime, endTime, winner }: CountdownProps) => {
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [customStatus, setCustomStatus] = useState<string | null>(' ');
 
   useEffect(() => {
     const updateClock = () => {
       const currentTime = Date.now();
 
       if (currentTime < startTime) {
-        setCustomStatus("Game has not started.");
+        setCustomStatus('Game has not started.');
       } else if (currentTime > endTime) {
-        setCustomStatus(`Game over!${winner ? ` ${winner} wins.` : ""}`);
+        setCustomStatus(`Game over!${winner ? ` ${winner} wins.` : ''}`);
       } else {
-        const t = endTime - new Date().getTime();
-        const seconds = Math.floor((t / 1000) % 60);
-        const minutes = Math.floor((t / 1000 / 60) % 60);
-        const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        const remainingTime = endTime - currentTime;
 
-        setHours(hours);
-        setMinutes(minutes);
-        setSeconds(seconds);
+        setHours(Math.floor((remainingTime / (1000 * 60 * 60)) % 24));
+        setMinutes(Math.floor((remainingTime / 1000 / 60) % 60));
+        setSeconds(Math.floor((remainingTime / 1000) % 60));
         setCustomStatus(null);
       }
     };
@@ -34,11 +42,6 @@ const Countdown = ({ startTime, endTime, winner }) => {
       clearInterval(interval);
     };
   }, [winner, startTime, endTime]);
-
-  const getFormattedTime = (time) => {
-    if (time < 10) return `0${time}`;
-    return time;
-  };
 
   return (
     <div className="countdown section">
