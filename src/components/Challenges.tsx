@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { Challenge, Player } from '../types';
 import Switch from './Switch/Switch';
 import './TableStyles.scss';
 
-const Challenges = ({ challenges }) => {
+type ChallengesProps = {
+  challenges: Challenge[];
+  players: Player[];
+};
+
+const challengeHasWinner = (challenge: Challenge, playerName: string) =>
+  challenge.goldWinner === playerName ||
+  challenge.silverWinner === playerName ||
+  challenge.bronzeWinner === playerName;
+
+const Challenges = ({ challenges, players }: ChallengesProps) => {
   const [hideCompletedChallenges, setHideCompletedChallenges] = useState(false);
   const [hideCompletedGolds, setHideCompletedGolds] = useState(false);
+  const [hiddenPlayerName, setHiddenPlayerName] = useState('');
 
   return (
     <div className="challenges section">
       <h2>Challenges</h2>
-      <div className="flex">
+      <div className="flex challengeFilters">
         <Switch
           toggleSwitch={() =>
             setHideCompletedChallenges(!hideCompletedChallenges)
@@ -20,6 +32,20 @@ const Challenges = ({ challenges }) => {
         <Switch toggleSwitch={() => setHideCompletedGolds(!hideCompletedGolds)}>
           Hide completed golds
         </Switch>
+        <label className="playerFilter">
+          Hide player
+          <select
+            onChange={(event) => setHiddenPlayerName(event.target.value)}
+            value={hiddenPlayerName}
+          >
+            <option value="">None</option>
+            {players.map((player) => (
+              <option key={player.name} value={player.name}>
+                {player.name}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
       <div className="tableContainer">
         <table>
@@ -40,9 +66,12 @@ const Challenges = ({ challenges }) => {
               const completedGold = challenge.goldWinner !== '';
               if (
                 (completed && hideCompletedChallenges) ||
-                (completedGold && hideCompletedGolds)
-              )
+                (completedGold && hideCompletedGolds) ||
+                (hiddenPlayerName !== '' &&
+                  challengeHasWinner(challenge, hiddenPlayerName))
+              ) {
                 return null;
+              }
 
               return (
                 <tr
