@@ -10,6 +10,19 @@ import './App.scss';
 
 const eventPassword = import.meta.env.VITE_EVENT_PASSWORD ?? '';
 
+type ThemeMode = 'dark' | 'light';
+
+const getPreferredThemeMode = (): ThemeMode => {
+  if (
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: light)').matches
+  ) {
+    return 'light';
+  }
+
+  return 'dark';
+};
+
 const App = () => {
   const [leaderboard, setLeaderboard] = useState<Player[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
@@ -18,6 +31,7 @@ const App = () => {
   const [passwordInput, setPasswordInput] = useState('');
   const [locked, setLocked] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getPreferredThemeMode);
   const gateInitialized = useRef(false);
 
   useEffect(() => {
@@ -61,9 +75,18 @@ const App = () => {
 
   const hasLoadedData =
     leaderboard.length > 0 && challenges.length > 0 && eventTimes !== null;
+  const nextThemeMode = themeMode === 'dark' ? 'light' : 'dark';
 
   return (
-    <div className="app">
+    <div className={`app app--${themeMode}`}>
+      <button
+        type="button"
+        className="themeToggle"
+        onClick={() => setThemeMode(nextThemeMode)}
+        aria-label={`Switch to ${nextThemeMode} mode`}
+      >
+        <span aria-hidden="true">{themeMode === 'light' ? '☀️' : '🌙'}</span>
+      </button>
       <div className="header">
         <img src={Logo} className="logo" alt="Olympic rings logo" />
         <h1>Video Game Olympics</h1>

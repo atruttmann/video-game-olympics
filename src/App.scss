@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+  font-family: 'Share Tech Mono', monospace;
   margin: 0;
   cursor: url('./assets/cursor.png'), auto;
 }
 
+button,
+input,
+select {
+  font: inherit;
+}
+
 :root {
-  color-scheme: dark;
+  color-scheme: dark light;
 }
 
 ::selection {
@@ -14,13 +25,78 @@ body {
 }
 
 .app {
-  font-family: 'Share Tech Mono', monospace;
+  --app-background: rgb(10, 10, 10);
+  --app-text: white;
+  --control-background: white;
+  --control-text: black;
+  --table-border: #{$gray};
+  --table-hover: #{$table-highlight};
+  --image-border: rgb(28, 17, 17);
+  --logo-shadow: rgba(255, 255, 255, 0);
+  --scrollbar-thumb: #{$gray};
+  --scrollbar-track: var(--app-background);
+
   font-size: $default-font-size;
+  color-scheme: dark;
   padding: 80px;
   height: 100%;
-  min-height: calc(100vh - 80px * 2);
-  background-color: black;
-  color: white;
+  min-height: 100vh;
+  background-color: var(--app-background);
+  color: var(--app-text);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border: 3px solid var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $green;
+  }
+
+  &.app--light {
+    --app-background: #e3e3e3;
+    --app-text: #111111;
+    --control-background: white;
+    --control-text: #111111;
+    --table-border: #b8b8b8;
+    --table-hover: #d8d8d8;
+    --image-border: #111111;
+    --logo-shadow: rgba(0, 0, 0, 0.25);
+    --scrollbar-thumb: #9a9a9a;
+    --scrollbar-track: #d8d8d8;
+
+    color-scheme: light;
+  }
+
+  .themeToggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--control-text);
+    border: none;
+    background: transparent;
+    cursor: inherit;
+    z-index: 1;
+  }
 
   h1,
   h2 {
@@ -45,6 +121,7 @@ body {
     .logo {
       width: 160px;
       margin-bottom: 10px;
+      filter: drop-shadow(0 0 1px var(--logo-shadow));
     }
   }
   .loading {
@@ -54,8 +131,25 @@ body {
   }
   .password {
     text-align: center;
+
+    input,
+    button {
+      height: 28px;
+    }
+
     input {
       margin-right: 10px;
+      color: var(--control-text);
+      background-color: var(--control-background);
+      border: 1px solid var(--table-border);
+    }
+
+    button {
+      background-color: $green;
+      border: none;
+      font-weight: 700;
+      padding: 0 12px;
+      cursor: inherit;
     }
   }
 }

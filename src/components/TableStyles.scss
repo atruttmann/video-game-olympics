@@ -17,7 +17,7 @@
       th,
       td {
         padding: 10px 40px 10px 10px;
-        border-bottom: 1px solid $gray;
+        border-bottom: 1px solid var(--table-border);
         &:last-child {
           padding-right: 10px;
         }
@@ -38,7 +38,7 @@
         white-space: nowrap;
       }
       tbody tr:hover:not(.completed) {
-        background-color: $table-highlight;
+        background-color: var(--table-hover);
         transition: ease 0.25s;
         font-weight: bold;
       }
@@ -53,7 +53,7 @@
     height: 35px;
     border-radius: 100%;
     margin-right: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--image-border);
     box-sizing: border-box;
   }
   .icon {
@@ -61,7 +61,7 @@
     height: 45px;
     border-radius: 6px;
     display: block;
-    border: 1px solid black;
+    border: 1px solid var(--image-border);
     margin-right: 15px;
     box-sizing: border-box;
   }
@@ -82,6 +82,7 @@
     .challengeFilters .switchContainer,
     .playerFilter {
       margin-bottom: 0;
+      margin-left: 0;
       margin-right: 0;
     }
 
@@ -93,6 +94,9 @@
       select {
         height: 28px;
         font: inherit;
+        color: var(--control-text);
+        background-color: var(--control-background);
+        border: 1px solid var(--table-border);
         margin-left: 15px;
       }
     }
@@ -114,7 +118,7 @@
 }
 
 @media screen and (max-width: $breakpoint-md) {
-  .leaderboard,
+  .section.leaderboard,
   table thead,
   table td.small {
     font-size: $default-font-size;
@@ -124,9 +128,23 @@
   .section:not(:last-child) {
     margin-bottom: 40px;
   }
-  .leaderboard,
-  table thead,
+  .challenges .challengeFilters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    .switchContainer,
+    .playerFilter {
+      width: 100%;
+    }
+  }
   table td.small {
     font-size: 1rem;
+  }
+  .section.leaderboard {
+    font-size: 1rem;
+  }
+  table thead {
+    font-size: 1.25rem;
   }
 }
